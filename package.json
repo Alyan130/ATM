@@ -1,6 +1,6 @@
 {
   "name": "m56k_atm_machine",
-  "version": "1.0.2",
+  "version": "2.0.4",
   "description": "Simple ATM application with inquirer",
   "main": "index.js",
   "type": "module",

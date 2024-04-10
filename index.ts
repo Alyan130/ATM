@@ -1,10 +1,11 @@
 #! /usr/bin/env node
 
-import inquirer from "inquirer";
+ import inquirer from "inquirer";
 
 let myBalance = 25000;
 let myPin = 2468;
-
+let c=true;
+while(c){
 let answer = await inquirer.prompt(
     [
         {
@@ -23,15 +24,14 @@ if (answer.pin == myPin) {
                 message: " Please select action to perform:",
                 type: "list",
                 name: "action",
-                choices: ["Withdraw", "Check balance"]
-            }
-        ]
-    );
+                choices: ["Withdraw", "Check balance","Deposit","Exit"]
+            },
+        ]);
     if (performAns.action === "Withdraw") {
         let amountAns = await inquirer.prompt(
             [
                 {
-                  message:"Enter amount to recieve :",
+                  message:"Enter amount to withdraw :",
                   type:"number",
                   name:"amount"
                 }
@@ -45,11 +45,28 @@ if (answer.pin == myPin) {
          console.log("Your balance is not enough to recieve amount!")
         }
     }
-
      else if(performAns.action==="Check balance"){
         console.log("Your  current balance is :"+myBalance);
     }
-
+    else if(performAns.action==="Deposit"){
+        let amountAns2 = await inquirer.prompt(
+            [
+                {
+                  message:"Enter amount to deposit :",
+                  type:"number",
+                  name:"amount"
+                }
+            ]
+        );
+        myBalance+=amountAns2.amount;
+        console.log("Your new balance is :"+myBalance);
+    }
+    else if(performAns.action==="Exit"){
+   c=false;
+    }
 } else {
     console.log("Incorrect pin code!")
 }
+console.log();
+}
+
